@@ -1,16 +1,16 @@
 import React from "react";
 
-const confirmation = () => {
+const Confirmation = () => {
 
-    let title = "confirmation page";
+    let title = "Order Confirmation";
 
     return (
         <div>
             <h1>
-                {title}
+                Thank you for your order! Your order confirmation number is 123!
             </h1>
         </div>
     )
 }
 
-export default confirmation;
+export default Confirmation;

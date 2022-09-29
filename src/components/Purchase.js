@@ -6,25 +6,20 @@ function Purchase() {
     
     const [order, setOrder] = useState({
         buyQuantity: [0,0,0,0,0], creditCardNumber: '', expirationDate: '', cvv: '',
-        cardHolderName: '', address1: '', address2: '', city: '', state: '', zip: '',
+        cardHolderName: '', shippingName: '',address1: '', address2: '', city: '', state: '', zip: '',
     });
 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        const state = { order, setOrder };
-        navigate('/purchase/paymentEntry', { state: state});
-    }
-
-    const handleClick = (e) => {
-        const state = { order, setOrder };
-        navigate('/purchase/paymentEntry', { state: state});
+        navigate('/purchase/paymentEntry', { state: {order:order}});
     }
 
     return (
         <div>
+            <h1> Item list </h1>
             <form onSubmit={handleSubmit}>
-                <label>Product 1 </label>
+                <label>Banana: 0.5$</label>
                 <input
                     type="number"
                     required
@@ -32,7 +27,7 @@ function Purchase() {
                         {order.buyQuantity[0] = e.target.value;}} 
                 />
                 <br/>
-                <label>Product 2 </label>
+                <label>Apple: 1$</label>
                 <input
                     type="number"
                     required
@@ -40,7 +35,7 @@ function Purchase() {
                         {order.buyQuantity[1] = e.target.value;}} 
                 />
                 <br/>
-                <label>Product 3 </label>
+                <label>Apple Watch Ultra: 799$</label>
                 <input
                     type="number"
                     required
@@ -48,7 +43,7 @@ function Purchase() {
                         {order.buyQuantity[2] = e.target.value;}} 
                 />
                 <br/>
-                <button onClick={handleClick} className='button'>Pay</button>
+                <button className='button'>Pay</button>
             </form>
         </div>
     )

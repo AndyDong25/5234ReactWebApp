@@ -20,11 +20,11 @@ function App() {
       <div className="content">
         <Routes>
           <Route path='/home' element={<Home/>} />
+          <Route path = '/' element={<Navigate replace to = "/home" />} />
           <Route path='/about' element={<About/>} />
           <Route path='/cart' element={<Cart/>} />
 
           <Route path = '/purchase' element={<Purchase/>} />
-          <Route path = '/' element={<Navigate replace to = "/purchase" />} />
           <Route path = '/purchase/paymentEntry' element={<PaymentEntry/>} />
           <Route path = '/purchase/shippingEntry' element={<ShippingEntry/>} />
           <Route path = '/purchase/viewOrder' element={<ViewOrder/>} />

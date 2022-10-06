@@ -2,8 +2,6 @@ import React from "react";
 
 const Confirmation = () => {
 
-    let title = "Order Confirmation";
-
     return (
         <div>
             <h1>

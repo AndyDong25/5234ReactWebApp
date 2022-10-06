@@ -35,7 +35,7 @@ const SampleFooter = () => (
           alt="more products"
         />
       ),
-      title: 'more info',
+      title: 'More Info',
       items: [
         {
           icon: (
@@ -44,9 +44,9 @@ const SampleFooter = () => (
               alt="yuque"
             />
           ),
-          title: 'cse5234',
+          title: 'PDF',
           url: 'https://com',
-          description: 'cse5234',
+          description: 'coming soon...',
           openExternal: true,
         },
         {
@@ -56,9 +56,9 @@ const SampleFooter = () => (
               alt="yuque"
             />
           ),
-          title: 'cse5234',
+          title: 'PDF',
           url: 'https://com',
-          description: 'cse5234',
+          description: 'coming soon...',
           openExternal: true,
         },
       ],

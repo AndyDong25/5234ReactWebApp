@@ -17,7 +17,7 @@ function Purchase() {
 
     return (
         <div>
-            <h1> Item list </h1>
+            <h1> Available Products </h1>
             <form onSubmit={handleSubmit}>
                 <label>Banana: 0.5$</label>
                 <img src = "https://images.heb.com/is/image/HEBGrocery/000377497" alt="banana" width="100" height ="100"></img>

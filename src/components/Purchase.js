@@ -6,7 +6,7 @@ function Purchase() {
     
     const [order, setOrder] = useState({
         buyQuantity: [0,0,0,0,0], creditCardNumber: '', expirationDate: '', cvv: '',
-        cardHolderName: '', shippingName: '',address1: '', address2: '', city: '', state: '', zip: '',
+        cardHolderName: '', shippingName: '', address1: '', address2: '', city: '', state: '', zip: '',
     });
 
     const navigate = useNavigate();
@@ -20,6 +20,7 @@ function Purchase() {
             <h1> Item list </h1>
             <form onSubmit={handleSubmit}>
                 <label>Banana: 0.5$</label>
+                <img src = "https://images.heb.com/is/image/HEBGrocery/000377497" alt="banana" width="100" height ="100"></img>
                 <input
                     type="number"
                     required
@@ -28,6 +29,7 @@ function Purchase() {
                 />
                 <br/>
                 <label>Apple: 1$</label>
+                <img src = "https://media.istockphoto.com/photos/apple-with-googly-eyes-on-white-picture-id611628746?" alt="banana" width="100" height ="100"></img>
                 <input
                     type="number"
                     required

@@ -7,18 +7,51 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    navigate("/purchase/viewOrder", { state: { order: location.state.order } });
+    navigate("/purchase/paymentEntry", {
+      state: { order: location.state.order },
+    });
   };
+
+  let totalPrice = 0.0;
+
+  if (location.state) {
+    const products = location.state.order.products;
+    for (let key in products) {
+      totalPrice += products[key]["cost"] * products[key]["buyQuantity"];
+    }
+  }
 
   return (
     <>
       <div className="block">
         <h1>Your Cart</h1>
+        <h2> Total Price: ${totalPrice} </h2>
         {location.state && (
           <div>
-            <h2>A x {location.state.order.buyQuantity[0]}</h2>
-            <h2>B x {location.state.order.buyQuantity[1]}</h2>
-            <h2>C x {location.state.order.buyQuantity[2]}</h2>
+            <h3>
+              {location.state.order.products.banana.name} x{" "}
+              {location.state.order.products.banana.buyQuantity}
+            </h3>
+            <h3>
+              {" "}
+              {location.state.order.products.apple.name} x{" "}
+              {location.state.order.products.apple.buyQuantity}
+            </h3>
+            <h3>
+              {" "}
+              {location.state.order.products.premiumApple.name} x{" "}
+              {location.state.order.products.premiumApple.buyQuantity}
+            </h3>
+            <h3>
+              {" "}
+              {location.state.order.products.dragonFruit.name} x{" "}
+              {location.state.order.products.dragonFruit.buyQuantity}
+            </h3>
+            <h3>
+              {" "}
+              {location.state.order.products.starFruit.name} x{" "}
+              {location.state.order.products.starFruit.buyQuantity}
+            </h3>
             <button className="button" onClick={handleClick}>
               Checkout
             </button>

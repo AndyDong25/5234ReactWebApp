@@ -34,6 +34,9 @@ const About = () => {
             <h3>CTO</h3>
             <h4>Jason</h4>
             <p>Grad Student at OSU</p>
+            <p class="text">
+              Jason is a passionate fruit lover. He always want to provide solutions for those who yearn for premium fruit but being too lazy to purchase them on scene. He has a lot of knowledge on python and he believes that Java is the best language in the world. 
+            </p>
           </div>
           <div class="grid_item">
             <img

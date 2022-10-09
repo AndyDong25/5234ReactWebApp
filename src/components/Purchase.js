@@ -1,6 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import "./purchase.css";
 
 function Purchase() {
     
@@ -17,34 +18,42 @@ function Purchase() {
 
     return (
         <div>
-            <h1> Available Products </h1>
+            <h1> Our Products </h1>
             <form onSubmit={handleSubmit}>
-                <label>Banana: 0.5$</label>
-                <img src = "https://images.heb.com/is/image/HEBGrocery/000377497" alt="banana" width="100" height ="100"></img>
-                <input
-                    type="number"
-                    required
-                    onChange={(e) =>
-                        {order.buyQuantity[0] = e.target.value;}} 
-                />
-                <br/>
-                <label>Apple: 1$</label>
-                <img src = "https://media.istockphoto.com/photos/apple-with-googly-eyes-on-white-picture-id611628746?" alt="banana" width="100" height ="100"></img>
-                <input
-                    type="number"
-                    required
-                    onChange={(e) =>
-                        {order.buyQuantity[1] = e.target.value;}} 
-                />
-                <br/>
-                <label>Apple Watch Ultra: 799$</label>
-                <input
-                    type="number"
-                    required
-                    onChange={(e) =>
-                        {order.buyQuantity[2] = e.target.value;}} 
-                />
-                <br/>
+                <table>
+                    <tr>
+                        <td><table>
+                                <tr><td><label>Banana | $0.50 each</label></td></tr>
+                                <tr><td><img src = "https://images.heb.com/is/image/HEBGrocery/000377497" alt="banana" width="100" height ="100"></img></td></tr>
+                                <tr><td><input
+                                    type="number"
+                                    required
+                                    onChange={(e) =>
+                                        {order.buyQuantity[0] = e.target.value;}} 
+                                /></td></tr>
+                            </table></td>
+                            <td><table>
+                            <tr><td><label>Apple | $1.00 each</label></td></tr>
+                            <tr><td><img src="https://healthjade.com/wp-content/uploads/2017/10/apple-fruit.jpg" alt="apple" width="85" height ="100"></img></td></tr>
+                            <tr><td><input
+                                type="number"
+                                required
+                                onChange={(e) =>
+                                    {order.buyQuantity[1] = e.target.value;}} 
+                            /></td></tr>
+                            </table></td>
+                            <td><table>
+                                <tr><td><label>Premium Apple | $1.50 each</label></td></tr>
+                                <tr><td><img src="https://media.istockphoto.com/photos/apple-with-googly-eyes-on-white-picture-id611628746?k=20&m=611628746&s=170667a&w=0&h=VHJe7xPLJuUhDn1lQuz0ZAcKxVa2D3vscnMk7oFpkdk=" alt="Premium Apple" width="150" height ="100"></img></td></tr>
+                                    <tr><td><input
+                                        type="number"
+                                        required
+                                        onChange={(e) =>
+                                            {order.buyQuantity[2] = e.target.value;}} 
+                                    /></td></tr>
+                            </table></td>  
+                        </tr>
+                </table>
                 <button className='button'>Pay</button>
             </form>
         </div>

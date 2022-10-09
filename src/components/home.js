@@ -14,7 +14,7 @@ const Home = () => {
       <h3>Our Mission</h3>
       <p>
         We are a direct to consumer premium fruit supplier focused on providing
-        holistic and sustainable fruit solutions for our customers.
+        holistic and sustainable fruit solutions for our customers. We envision a world where customers no longer have to be burdened by picking out fruit at the store, and instead have the finest selections shipped directly to them.
       </p>
       <h3>Business Strategy</h3>
       <p>

@@ -39,6 +39,7 @@ const About = () => {
             <h3>VP</h3>
             <h4>JJ</h4>
             <p>4th Year CSE Student at OSU</p>
+            <p class="text">As son of the CEO, JJ has worked tirelessly to become the youngest Vice President in company history. He is a former CIA operative and uses his expertise in logistics to oversee supply chains and ensure a steady stream of fresh fruit is available for our customers. </p>
           </div>
         </div>
       </div>

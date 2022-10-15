@@ -17,28 +17,28 @@ function PaymentEntry() {
     <div className="block">
       <h1>Your Items</h1>
       <h2>
-        {location.state.order.products.banana.name} x{" "}
-        {location.state.order.products.banana.buyQuantity}
+        {location.state.order.products["1"].name} x{" "}
+        {location.state.order.products["1"].buyQuantity}
       </h2>
       <h2>
         {" "}
-        {location.state.order.products.apple.name} x{" "}
-        {location.state.order.products.apple.buyQuantity}
+        {location.state.order.products["2"].name} x{" "}
+        {location.state.order.products["2"].buyQuantity}
       </h2>
       <h2>
         {" "}
-        {location.state.order.products.premiumApple.name} x{" "}
-        {location.state.order.products.premiumApple.buyQuantity}
+        {location.state.order.products["3"].name} x{" "}
+        {location.state.order.products["3"].buyQuantity}
       </h2>
       <h2>
         {" "}
-        {location.state.order.products.dragonFruit.name} x{" "}
-        {location.state.order.products.dragonFruit.buyQuantity}
+        {location.state.order.products["4"].name} x{" "}
+        {location.state.order.products["4"].buyQuantity}
       </h2>
       <h2>
         {" "}
-        {location.state.order.products.starFruit.name} x{" "}
-        {location.state.order.products.starFruit.buyQuantity}
+        {location.state.order.products["5"].name} x{" "}
+        {location.state.order.products["5"].buyQuantity}
       </h2>
       <form onSubmit={handleSubmit}>
         <label>Credit Card Number </label>

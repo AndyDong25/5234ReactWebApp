@@ -15,7 +15,7 @@ const About = () => {
               height="150"
             ></img>
             <h3>CEO</h3>
-            <h4>Andy Dong</h4>
+            <h4>Andy</h4>
             <p>4th Year CSE Student at OSU</p>
             <p class="text">
               Andy is seasoned technology executive, with vast amounts of
@@ -35,7 +35,10 @@ const About = () => {
             <h4>Jason</h4>
             <p>Grad Student at OSU</p>
             <p class="text">
-              Jason is a passionate fruit lover. He always want to provide solutions for those who yearn for premium fruit but being too lazy to purchase them on scene. He has a lot of knowledge on python and he believes that Java is the best language in the world. 
+              Jason is a passionate fruit lover. He always want to provide
+              solutions for those who yearn for premium fruit but being too lazy
+              to purchase them on scene. He has a lot of knowledge on python and
+              he believes that Java is the best language in the world.
             </p>
           </div>
           <div class="grid_item">

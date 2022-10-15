@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./purchase.css";
@@ -6,30 +7,35 @@ import "./purchase.css";
 function Purchase() {
   const [order, setOrder] = useState({
     products: {
-      banana: {
-        name: "Banana",
-        cost: 0.5,
-        buyQuantity: 0,
-      },
-      apple: {
-        name: "Apple",
-        cost: 1.0,
+      1: {
+        name: "",
+        cost: 0,
         buyQuanitity: 0,
+        image: "",
       },
-      premiumApple: {
-        name: "Premium Apple",
-        cost: 1.5,
+      2: {
+        name: "",
+        cost: 0,
         buyQuanitity: 0,
+        image: "",
       },
-      dragonFruit: {
-        name: "Dragon Fruit",
-        cost: 3.0,
+      3: {
+        name: "",
+        cost: 0,
         buyQuanitity: 0,
+        image: "",
       },
-      starFruit: {
-        name: "Star Fruit",
-        cost: 2.0,
+      4: {
+        name: "",
+        cost: 0,
         buyQuanitity: 0,
+        image: "",
+      },
+      5: {
+        name: "",
+        cost: 0,
+        buyQuanitity: 0,
+        image: "",
       },
     },
     creditCardNumber: "",
@@ -50,6 +56,25 @@ function Purchase() {
     navigate("/cart", { state: { order: order } });
   };
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:7000/get_all_items", {
+        params: {},
+      })
+      .then((data) => {
+        const data_ = JSON.parse(JSON.stringify(data.data));
+        data_.forEach((order_) => {
+          var product = order.products[order_.id.toString()];
+          product["name"] = order_.name;
+          product["cost"] = order_.price;
+          // we should create separate database to keep track of orders
+          // product["buyQuantity"] = order_.quantity;
+          product["image"] = order_.image_link;
+        });
+        setOrder({ ...order });
+      });
+  }, []);
+
   return (
     <div>
       <h1> Our Products (Changes Daily!) </h1>
@@ -61,16 +86,15 @@ function Purchase() {
                 <tr>
                   <td>
                     <label>
-                      {order.products.banana.name} | $
-                      {order.products.banana.cost}
+                      {order.products["1"].name} | ${order.products["1"].cost}
                     </label>
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <img
-                      src="https://images.heb.com/is/image/HEBGrocery/000377497"
-                      alt="banana"
+                      src={order.products["1"].image}
+                      alt={order.products["1"].name}
                       width="100"
                       height="100"
                     ></img>
@@ -82,7 +106,7 @@ function Purchase() {
                       type="number"
                       required
                       onChange={(e) => {
-                        order.products.banana.buyQuantity = e.target.value;
+                        order.products["1"].buyQuantity = e.target.value;
                       }}
                     />
                   </td>
@@ -93,14 +117,14 @@ function Purchase() {
               <table>
                 <tr>
                   <td>
-                    {order.products.apple.name} | ${order.products.apple.cost}{" "}
+                    {order.products["2"].name} | ${order.products["2"].cost}{" "}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <img
-                      src="https://healthjade.com/wp-content/uploads/2017/10/apple-fruit.jpg"
-                      alt="apple"
+                      src={order.products["2"].image}
+                      alt={order.products["2"].name}
                       width="85"
                       height="100"
                     ></img>
@@ -112,7 +136,7 @@ function Purchase() {
                       type="number"
                       required
                       onChange={(e) => {
-                        order.products.apple.buyQuantity = e.target.value;
+                        order.products["2"].buyQuantity = e.target.value;
                       }}
                     />
                   </td>
@@ -123,15 +147,14 @@ function Purchase() {
               <table>
                 <tr>
                   <td>
-                    {order.products.premiumApple.name} | $
-                    {order.products.premiumApple.cost}{" "}
+                    {order.products["3"].name} | ${order.products["3"].cost}{" "}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <img
-                      src="https://media.istockphoto.com/photos/apple-with-googly-eyes-on-white-picture-id611628746?k=20&m=611628746&s=170667a&w=0&h=VHJe7xPLJuUhDn1lQuz0ZAcKxVa2D3vscnMk7oFpkdk="
-                      alt="Premium Apple"
+                      src={order.products["3"].image}
+                      alt={order.products["3"].name}
                       width="150"
                       height="100"
                     ></img>
@@ -143,8 +166,7 @@ function Purchase() {
                       type="number"
                       required
                       onChange={(e) => {
-                        order.products.premiumApple.buyQuantity =
-                          e.target.value;
+                        order.products["3"].buyQuantity = e.target.value;
                       }}
                     />
                   </td>
@@ -155,15 +177,14 @@ function Purchase() {
               <table>
                 <tr>
                   <td>
-                    {order.products.dragonFruit.name} | $
-                    {order.products.dragonFruit.cost}{" "}
+                    {order.products["4"].name} | ${order.products["4"].cost}{" "}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Hylocereus_undatus_red_pitahaya.jpg/1200px-Hylocereus_undatus_red_pitahaya.jpg"
-                      alt="DragonFruit"
+                      src={order.products["4"].image}
+                      alt={order.products["4"].name}
                       width="150"
                       height="100"
                     ></img>
@@ -175,7 +196,7 @@ function Purchase() {
                       type="number"
                       required
                       onChange={(e) => {
-                        order.products.dragonFruit.buyQuantity = e.target.value;
+                        order.products["4"].buyQuantity = e.target.value;
                       }}
                     />
                   </td>
@@ -186,15 +207,14 @@ function Purchase() {
               <table>
                 <tr>
                   <td>
-                    {order.products.starFruit.name} | $
-                    {order.products.starFruit.cost}{" "}
+                    {order.products["5"].name} | ${order.products["5"].cost}{" "}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <img
-                      src="https://storage.googleapis.com/images-fol-prd-83dd8b8.fol.prd.v8.commerce.mi9cloud.com/product-images/detail/4256.jpg"
-                      alt="StarFruit"
+                      src={order.products["5"].image}
+                      alt={order.products["5"].name}
                       width="150"
                       height="100"
                     ></img>
@@ -206,7 +226,7 @@ function Purchase() {
                       type="number"
                       required
                       onChange={(e) => {
-                        order.products.starFruit.buyQuantity = e.target.value;
+                        order.products["5"].buyQuantity = e.target.value;
                       }}
                     />
                   </td>

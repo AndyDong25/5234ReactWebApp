@@ -28,28 +28,28 @@ const ViewOrder = () => {
       <h1>{title}</h1>
       <h2>Your Order</h2>
       <p>
-        {location.state.order.products.banana.name} x{" "}
-        {location.state.order.products.banana.buyQuantity}
+        {location.state.order.products["1"].name} x{" "}
+        {location.state.order.products["1"].buyQuantity}
       </p>
       <p>
         {" "}
-        {location.state.order.products.apple.name} x{" "}
-        {location.state.order.products.apple.buyQuantity}
+        {location.state.order.products["2"].name} x{" "}
+        {location.state.order.products["2"].buyQuantity}
       </p>
       <p>
         {" "}
-        {location.state.order.products.premiumApple.name} x{" "}
-        {location.state.order.products.premiumApple.buyQuantity}
+        {location.state.order.products["3"].name} x{" "}
+        {location.state.order.products["3"].buyQuantity}
       </p>
       <p>
         {" "}
-        {location.state.order.products.dragonFruit.name} x{" "}
-        {location.state.order.products.dragonFruit.buyQuantity}
+        {location.state.order.products["4"].name} x{" "}
+        {location.state.order.products["4"].buyQuantity}
       </p>
       <p>
         {" "}
-        {location.state.order.products.starFruit.name} x{" "}
-        {location.state.order.products.starFruit.buyQuantity}
+        {location.state.order.products["5"].name} x{" "}
+        {location.state.order.products["5"].buyQuantity}
       </p>
       <h3>Total Price: ${totalPrice}</h3>
       <h2>Payment Information</h2>

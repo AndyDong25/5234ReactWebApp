@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./db");
+const orderDB = require("./orderDB");
 const app = express();
 const port = 7000;
 const cors = require("cors");
@@ -21,6 +22,27 @@ app.listen(port, () => {
 app.get("/", function (req, res) {
   res.send("Hello World!");
 });
+
+const drop_orders = "DROP TABLE IF EXISTS ORDERS";
+const create_orders =
+  "CREATE TABLE ORDERS ( \
+  id int NOT NULL AUTO_INCREMENT, \
+  item1Quantity int,\
+  item2Quantity int,\
+  item3Quantity int,\
+  item4Quantity int,\
+  item5Quantity int,\
+  creditCardNumber varchar(255), \
+  expirationDate varchar(255), \
+  cvv varchar(255), \
+  cardHolderName varchar(255), \
+  shippingName varchar(255), \
+  address1 varchar(255), \
+  address2 varchar(255), \
+  city varchar(255), \
+  state varchar(255), \
+  zip varchar(255), \
+  PRIMARY KEY (Id) )";
 
 const qrop_item = "DROP TABLE IF EXISTS Item";
 const create_item =
@@ -44,6 +66,9 @@ const item_add4 =
 const item_add5 =
   "INSERT INTO Item (name, quantity, price, image_link) VALUES ('Star Fruit', 10, 2, 'https://storage.googleapis.com/images-fol-prd-83dd8b8.fol.prd.v8.commerce.mi9cloud.com/product-images/detail/4256.jpg')";
 
+const order_example =
+  "INSERT INTO ORDERS (item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES (1, 1, 2, 2, 3, '1234', '0824', '233', 'Andy', 'Andy', '111 street', '', 'Columbus', 'OH', '43201')";
+
 app.get("/get_all_items", function (req, res) {
   db.query(qrop_item);
   db.query(create_item);
@@ -52,6 +77,10 @@ app.get("/get_all_items", function (req, res) {
   db.query(item_add3);
   db.query(item_add4);
   db.query(item_add5);
+
+  orderDB.query(drop_orders);
+  orderDB.query(create_orders);
+  orderDB.query(order_example);
 
   const result = db.query("select * from Item");
   return res.send(result);
@@ -65,15 +94,54 @@ app.get("/get_item/:id", function (req, res) {
 });
 
 app.post("/update_quantity", function (req, res) {
-  var IDs = req.body.names;
-  var quantity = req.body.quantity;
+  const products = req.body.body.products;
 
-  IDs.forEach((id_, index) => {
-    const quan = quantity[index];
-    const result1 = db.query(
-      `UPDATE Item SET quantity = ${quan} WHERE Id = ${id_};`
-    );
-  });
+  const item1Quantity = products["1"]["buyQuantity"];
+  const item2Quantity = products["2"]["buyQuantity"];
+  const item3Quantity = products["3"]["buyQuantity"];
+  const item4Quantity = products["4"]["buyQuantity"];
+  const item5Quantity = products["5"]["buyQuantity"];
 
-  return res.send("");
+  db.query(
+    `UPDATE Item SET quantity = quantity - ${item1Quantity} WHERE Id = 1;`
+  );
+  db.query(
+    `UPDATE Item SET quantity = quantity - ${item2Quantity} WHERE Id = 2;`
+  );
+  db.query(
+    `UPDATE Item SET quantity = quantity - ${item3Quantity} WHERE Id = 3;`
+  );
+  db.query(
+    `UPDATE Item SET quantity = quantity - ${item4Quantity} WHERE Id = 4;`
+  );
+  db.query(
+    `UPDATE Item SET quantity = quantity - ${item5Quantity} WHERE Id = 5;`
+  );
+
+  return res.send("Successfully updated quantities!");
+});
+
+app.post("/process_order", function (req, res) {
+  const order = req.body.body.order;
+
+  const item1Quantity = order.products["1"]["buyQuantity"];
+  const item2Quantity = order.products["2"]["buyQuantity"];
+  const item3Quantity = order.products["3"]["buyQuantity"];
+  const item4Quantity = order.products["4"]["buyQuantity"];
+  const item5Quantity = order.products["5"]["buyQuantity"];
+  const creditCardNumber = order["creditCardNumber"];
+  const expirationDate = order["expirationDate"];
+  const cvv = order["cvv"];
+  const cardHolderName = order["cardHolderName"];
+  const shippingName = order["shippingName"];
+  const address1 = order["address1"];
+  const address2 = order["address2"];
+  const city = order["city"];
+  const state = order["state"];
+  const zip = order["zip"];
+
+  const insert_order = `INSERT INTO ORDERS (item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES (${item1Quantity}, ${item2Quantity}, ${item3Quantity}, ${item4Quantity}, ${item5Quantity}, '${creditCardNumber}', '${expirationDate}', '${cvv}', '${cardHolderName}', '${shippingName}', '${address1}', '${address2}', '${city}',  '${state}', '${zip}')`;
+  orderDB.query(insert_order);
+
+  return res.send("Successfully inserted order!");
 });

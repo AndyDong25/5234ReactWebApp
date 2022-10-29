@@ -10,31 +10,36 @@ function Purchase() {
       1: {
         name: "",
         cost: 0,
-        buyQuanitity: 0,
+        buyQuantity: 0,
+        inventoryCount: 0,
         image: "",
       },
       2: {
         name: "",
         cost: 0,
-        buyQuanitity: 0,
+        buyQuantity: 0,
+        inventoryCount: 0,
         image: "",
       },
       3: {
         name: "",
         cost: 0,
-        buyQuanitity: 0,
+        buyQuantity: 0,
+        inventoryCount: 0,
         image: "",
       },
       4: {
         name: "",
         cost: 0,
-        buyQuanitity: 0,
+        buyQuantity: 0,
+        inventoryCount: 0,
         image: "",
       },
       5: {
         name: "",
         cost: 0,
-        buyQuanitity: 0,
+        buyQuantity: 0,
+        inventoryCount: 0,
         image: "",
       },
     },
@@ -67,8 +72,7 @@ function Purchase() {
           var product = order.products[order_.id.toString()];
           product["name"] = order_.name;
           product["cost"] = order_.price;
-          // we should create separate database to keep track of orders
-          // product["buyQuantity"] = order_.quantity;
+          product["inventoryCount"] = order_.quantity;
           product["image"] = order_.image_link;
         });
         setOrder({ ...order });
@@ -104,6 +108,7 @@ function Purchase() {
                   <td>
                     <input
                       type="number"
+                      max={order.products["1"].inventoryCount}
                       required
                       onChange={(e) => {
                         order.products["1"].buyQuantity = e.target.value;
@@ -134,6 +139,7 @@ function Purchase() {
                   <td>
                     <input
                       type="number"
+                      max={order.products["2"].inventoryCount}
                       required
                       onChange={(e) => {
                         order.products["2"].buyQuantity = e.target.value;
@@ -164,6 +170,7 @@ function Purchase() {
                   <td>
                     <input
                       type="number"
+                      max={order.products["3"].inventoryCount}
                       required
                       onChange={(e) => {
                         order.products["3"].buyQuantity = e.target.value;
@@ -194,6 +201,7 @@ function Purchase() {
                   <td>
                     <input
                       type="number"
+                      max={order.products["4"].inventoryCount}
                       required
                       onChange={(e) => {
                         order.products["4"].buyQuantity = e.target.value;
@@ -224,6 +232,7 @@ function Purchase() {
                   <td>
                     <input
                       type="number"
+                      max={order.products["5"].inventoryCount}
                       required
                       onChange={(e) => {
                         order.products["5"].buyQuantity = e.target.value;

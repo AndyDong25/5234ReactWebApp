@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -9,9 +10,18 @@ const ViewOrder = () => {
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    navigate("/purchase/confirmation", {
-      state: { order: location.state.order },
-    });
+    axios
+      .post("http://localhost:7000/process_order", {
+        body: { order: location.state.order },
+      })
+      .then((data) => {
+        axios.post("http://localhost:7000/update_quantity", {
+          body: { products: location.state.order.products },
+        });
+        navigate("/purchase/confirmation", {
+          state: { order: location.state.order },
+        });
+      });
   };
 
   let totalPrice = 0.0;

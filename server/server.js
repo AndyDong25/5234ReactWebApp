@@ -27,6 +27,7 @@ const drop_orders = "DROP TABLE IF EXISTS ORDERS";
 const create_orders =
   "CREATE TABLE ORDERS ( \
   id int NOT NULL AUTO_INCREMENT, \
+  confNum varchar(255), \
   item1Quantity int,\
   item2Quantity int,\
   item3Quantity int,\
@@ -67,7 +68,7 @@ const item_add5 =
   "INSERT INTO Item (name, quantity, price, image_link) VALUES ('Star Fruit', 10, 2, 'https://storage.googleapis.com/images-fol-prd-83dd8b8.fol.prd.v8.commerce.mi9cloud.com/product-images/detail/4256.jpg')";
 
 const order_example =
-  "INSERT INTO ORDERS (item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES (1, 1, 2, 2, 3, '1234', '0824', '233', 'Andy', 'Andy', '111 street', '', 'Columbus', 'OH', '43201')";
+  "INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES ('TEST', 1, 1, 2, 2, 3, '1234', '0824', '233', 'Andy', 'Andy', '111 street', '', 'Columbus', 'OH', '43201')";
 
 app.get("/get_all_items", function (req, res) {
   db.query(qrop_item);
@@ -124,6 +125,7 @@ app.post("/update_quantity", function (req, res) {
 app.post("/process_order", function (req, res) {
   const order = req.body.body.order;
 
+  const confNum = req.body.confNum;
   const item1Quantity = order.products["1"]["buyQuantity"];
   const item2Quantity = order.products["2"]["buyQuantity"];
   const item3Quantity = order.products["3"]["buyQuantity"];
@@ -140,8 +142,24 @@ app.post("/process_order", function (req, res) {
   const state = order["state"];
   const zip = order["zip"];
 
-  const insert_order = `INSERT INTO ORDERS (item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES (${item1Quantity}, ${item2Quantity}, ${item3Quantity}, ${item4Quantity}, ${item5Quantity}, '${creditCardNumber}', '${expirationDate}', '${cvv}', '${cardHolderName}', '${shippingName}', '${address1}', '${address2}', '${city}',  '${state}', '${zip}')`;
+  const insert_order = `INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES ('${confNum}', ${item1Quantity}, ${item2Quantity}, ${item3Quantity}, ${item4Quantity}, ${item5Quantity}, '${creditCardNumber}', '${expirationDate}', '${cvv}', '${cardHolderName}', '${shippingName}', '${address1}', '${address2}', '${city}',  '${state}', '${zip}')`;
   orderDB.query(insert_order);
 
   return res.send("Successfully inserted order!");
+});
+
+app.post("/process_payment", function (req, res) {
+  const paymentInfo = req.body.order;
+
+  const confirmationNum = "123";
+  console.log("Payment Received!");
+  return res.send(confirmationNum);
+});
+
+app.post("/initiate_shipping", async function (req, res) {
+  const message = req.body.message;
+  console.log(message);
+
+  const shippingLabel = "A1CD";
+  return res.send(shippingLabel);
 });

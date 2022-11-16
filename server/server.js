@@ -43,6 +43,7 @@ const create_orders =
   city varchar(255), \
   state varchar(255), \
   zip varchar(255), \
+  status varchar(255), \
   PRIMARY KEY (Id) )";
 
 const qrop_item = "DROP TABLE IF EXISTS Item";
@@ -68,20 +69,22 @@ const item_add5 =
   "INSERT INTO Item (name, quantity, price, image_link) VALUES ('Star Fruit', 10, 2, 'https://storage.googleapis.com/images-fol-prd-83dd8b8.fol.prd.v8.commerce.mi9cloud.com/product-images/detail/4256.jpg')";
 
 const order_example =
-  "INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES ('TEST', 1, 1, 2, 2, 3, '1234', '0824', '233', 'Andy', 'Andy', '111 street', '', 'Columbus', 'OH', '43201')";
+  "INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip, status) VALUES ('TEST', 1, 1, 2, 2, 3, '1234', '0824', '233', 'Andy', 'Andy', '111 street', '', 'Columbus', 'OH', '43201', 'processed')";
 
 app.get("/get_all_items", function (req, res) {
-  db.query(qrop_item);
-  db.query(create_item);
-  db.query(item_add1);
-  db.query(item_add2);
-  db.query(item_add3);
-  db.query(item_add4);
-  db.query(item_add5);
+  // run following queries to initialize all databases when using for first time
 
-  orderDB.query(drop_orders);
-  orderDB.query(create_orders);
-  orderDB.query(order_example);
+  // db.query(qrop_item);
+  // db.query(create_item);
+  // db.query(item_add1);
+  // db.query(item_add2);
+  // db.query(item_add3);
+  // db.query(item_add4);
+  // db.query(item_add5);
+
+  // orderDB.query(drop_orders);
+  // orderDB.query(create_orders);
+  // orderDB.query(order_example);
 
   const result = db.query("select * from Item");
   return res.send(result);
@@ -142,7 +145,7 @@ app.post("/process_order", function (req, res) {
   const state = order["state"];
   const zip = order["zip"];
 
-  const insert_order = `INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip) VALUES ('${confNum}', ${item1Quantity}, ${item2Quantity}, ${item3Quantity}, ${item4Quantity}, ${item5Quantity}, '${creditCardNumber}', '${expirationDate}', '${cvv}', '${cardHolderName}', '${shippingName}', '${address1}', '${address2}', '${city}',  '${state}', '${zip}')`;
+  const insert_order = `INSERT INTO ORDERS (confNum, item1Quantity, item2Quantity, item3Quantity, item4Quantity, item5Quantity, creditCardNumber, expirationDate, cvv, cardHolderName, shippingName, address1, address2, city, state, zip, status) VALUES ('${confNum}', ${item1Quantity}, ${item2Quantity}, ${item3Quantity}, ${item4Quantity}, ${item5Quantity}, '${creditCardNumber}', '${expirationDate}', '${cvv}', '${cardHolderName}', '${shippingName}', '${address1}', '${address2}', '${city}',  '${state}', '${zip}', 'new')`;
   orderDB.query(insert_order);
 
   return res.send("Successfully inserted order!");

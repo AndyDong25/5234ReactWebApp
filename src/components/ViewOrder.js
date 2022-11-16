@@ -27,9 +27,11 @@ const ViewOrder = () => {
                 message: "PDF wants to initiate shipping.",
               })
               .then((response) => console.log(response.data));
-            axios.post("http://localhost:7000/update_quantity", {
-              body: { products: location.state.order.products },
-            });
+            // axios.post("http://localhost:7000/update_quantity", {
+            //   body: { products: location.state.order.products },
+            // });
+            // above line post method processes the order immediately after placing
+            // there is also a batch application to process orders if we want to set up that way
             navigate("/purchase/confirmation", {
               state: { order: location.state.order },
             });
